@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <script>
+      (function() {
+        try {
+          var _fetch = window.fetch;
+          var defineFetch = function(obj) {
+            try {
+              Object.defineProperty(obj, 'fetch', {
+                get: function() {
+                  return _fetch;
+                },
+                set: function(fn) {
+                  _fetch = fn;
+                },
+                configurable: true,
+                enumerable: true
+              });
+            } catch (e) {}
+          };
+          defineFetch(window);
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            defineFetch(Window.prototype);
+          }
+        } catch (err) {}
+
+        window.addEventListener('error', function(event) {
+          if (event && event.message && event.message.indexOf('fetch') !== -1 && event.message.indexOf('getter') !== -1) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D&D Boss Health & Damage Tracker</title>
+    <meta name="description" content="Интерактивное окно босса для D&D с динамическим визуальным ухудшением состояния при получении урона, настройкой макс. ОЗ и окном ввода урона." />
+    <meta property="og:title" content="D&D Boss Health & Damage Tracker" />
+    <meta property="og:description" content="Интерактивное окно босса для D&D с динамическим визуальным ухудшением состояния при получении урона, настройкой макс. ОЗ и окном ввода урона." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cinzel+Decorative:wght@700&family=MedievalSharp&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-stone-950 text-stone-100 antialiased selection:bg-red-900 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

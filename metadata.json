@@ -1,0 +1,6 @@
+{
+  "name": "D&D Boss Health & Damage Tracker",
+  "description": "Интерактивное окно босса для D&D с динамическим визуальным ухудшением состояния при получении урона, настройкой макс. ОЗ и окном ввода урона.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
